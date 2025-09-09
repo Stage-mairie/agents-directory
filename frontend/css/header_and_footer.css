@@ -1,0 +1,49 @@
+header, footer {
+  color: white;
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: #2d9595;
+}
+
+header {
+  padding: 3px 7px;
+  min-height: 170px;
+}
+
+footer {
+  padding: 10px;
+  margin-top: auto;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header-left,
+.header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex: 2;
+  text-align: center;
+}
+
+.logo {
+  height: 170px;
+  width: auto;
+}
+
+.header-title {
+  font-size: 2rem;
+  flex-grow: 1;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  margin: 0;
+}

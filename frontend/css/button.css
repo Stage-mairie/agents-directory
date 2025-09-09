@@ -1,0 +1,156 @@
+/* ------------------ */
+/* BOUTON LOGOUT      */
+/* ------------------ */
+
+#logout-btn {
+  background-color: #2d9595;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+  transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+  background-color: #217b7b;
+}
+
+
+/* ------------------ */
+/* BOUTON tri*/
+/* ------------------ */
+
+#sort-alpha-btn {
+  background-color: #2d9595;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#sort-alpha-btn:hover {
+  background-color: #217b7b;
+}
+
+#save-agent-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 7px 15px;
+}
+#save-agent-btn:hover {
+  background-color: #129e12;
+}
+
+#cancel-add-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 7px 15px;
+}
+#cancel-add-btn:hover {
+  background-color: #c82333;
+}
+
+.button-row button.save-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 7px 15px;
+}
+
+.button-row button.save-btn:hover {
+  background-color: #218838;
+}
+
+.edit-btn {
+  background-color: transparent;
+  color: #007bff;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-right: 10px;
+}
+
+.edit-btn:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.edit-form-container.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.add-agent-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+#add-agent-btn {
+  display: none;
+  background-color: #004080;
+  color: white;
+  padding: 10px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-agent-btn:hover {
+  background-color: #0066cc;
+}
+
+
+.message {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-left: 4px solid #4a90e2; /* Accent color */
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-size: 0.95rem;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInOut 3.5s ease-in-out;
+  pointer-events: none;
+}
+
+.message.success {
+  border-left-color: #4caf50;
+}
+
+.message.error {
+  border-left-color: #e53935;
+}
+
+@keyframes fadeInOut {
+  0% {
+    transform: translateX(-50%) translateY(-8px);
+    opacity: 0;
+  }
+  10%, 90% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-8px);
+    opacity: 0;
+  }
+}
