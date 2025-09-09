@@ -25,24 +25,40 @@ http://localhost:3000
 
 📁 Arborescence du projet
 .
-├── agents.html         
-├── login.html          
-├── script.js           
-├── login.js            
-├── style.css          
-├── server.py          
-├── init_db.py          
-├── data.db             
-├── README.md          
-└── images/
-    └── logo.png   
+├── backend
+│ ├── pycache/
+│ ├── sql/
+│ ├── auth.py
+│ ├── db.py
+│ ├── handlers.py
+│ ├── init_db.py
+│ └── server.py
+│
+├── frontend
+│ ├── css/
+│ ├── images/
+│ ├── js/
+│ ├── agents.html
+│ └── login.html
+│
+├── .gitattributes
+├── .gitignore
+└── README.md 
 
 ⚙️ Fonctionnalités
+🔐 Authentification avec rôles
+
+Admin : peut ajouter, modifier ou supprimer un agent (édition des fiches).
+
+Utilisateur simple : peut uniquement consulter les informations des agents.
+
 🔍 Recherche d’agents par nom ou prénom
 
 🗂️ Filtrage par service
 
 ➕ Ajout d’un agent avec formulaire dynamique
+
+✏️ Modification des informations d’un agent (admin uniquement).
 
 🗑️ Suppression d’un agent par email (via modale)
 
