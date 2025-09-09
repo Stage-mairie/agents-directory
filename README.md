@@ -23,43 +23,31 @@ Une fois lancé, ouvre ton navigateur à l'adresse :
 
 http://localhost:3000
 
-📁 Arborescence du projet
+## 📁 Arborescence du projet
 
+```
 .
-
 ├── backend
-│
 │   ├── __pycache__/
-│
 │   ├── sql/
-│
 │   ├── auth.py
-│
 │   ├── db.py
-│
 │   ├── handlers.py
-│
 │   ├── init_db.py
-│
 │   └── server.py
 │
 ├── frontend
-│
 │   ├── css/
-│
 │   ├── images/
-│
 │   ├── js/
-│
 │   ├── agents.html
-│
 │   └── login.html
 │
 ├── .gitattributes
-│
 ├── .gitignore
-│
 └── README.md
+```
+
 
 
 ⚙️ Fonctionnalités
