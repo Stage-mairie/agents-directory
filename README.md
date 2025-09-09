@@ -24,28 +24,30 @@ Une fois lancé, ouvre ton navigateur à l'adresse :
 http://localhost:3000
 
 📁 Arborescence du projet
+
 .
 ├── backend
-│ ├── pycache/
-│ ├── sql/
-│ ├── auth.py
-│ ├── db.py
-│ ├── handlers.py
-│ ├── init_db.py
-│ └── server.py
+│   ├── __pycache__/
+│   ├── sql/
+│   ├── auth.py
+│   ├── db.py
+│   ├── handlers.py
+│   ├── init_db.py
+│   └── server.py
 │
 ├── frontend
-│ ├── css/
-│ ├── images/
-│ ├── js/
-│ ├── agents.html
-│ └── login.html
+│   ├── css/
+│   ├── images/
+│   ├── js/
+│   ├── agents.html
+│   └── login.html
 │
 ├── .gitattributes
 ├── .gitignore
-└── README.md 
+└── README.md
 
 ⚙️ Fonctionnalités
+
 🔐 Authentification avec rôles
 
 Admin : peut ajouter, modifier ou supprimer un agent (édition des fiches).
