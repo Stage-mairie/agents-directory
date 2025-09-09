@@ -1,0 +1,22 @@
+# Normaliser les fins de lignes
+* text=auto
+
+# Forcer LF pour les fichiers de code (évite les faux diffs)
+*.py   text eol=lf
+*.js   text eol=lf
+*.css  text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.sh   text eol=lf
+
+# Garder binaire tel quel (images, polices, etc.)
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.svg  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.ico  binary
