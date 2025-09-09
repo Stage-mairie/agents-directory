@@ -1,35 +1,36 @@
-# 📇 Annuaire des Agents de la Mairie de Saint-André
 
-Ce projet est une application web permettant de gérer les agents de la mairie (ajout, recherche, tri, suppression).  
-Il utilise une interface **HTML/CSS/JS** côté client et un serveur **Python + SQLite** côté serveur.
+# 📇 City of Saint-André – Staff Directory
+
+This project is a web application for managing city hall staff members (add, search, sort, delete).  
+It uses a **HTML/CSS/JS** frontend and a **Python + SQLite** backend.
 
 ---
 
-## 🚀 Lancement du projet
+## 🚀 Getting Started
 
-### 1. Créer la base de données
-Avant de lancer l'application, crée la base de données avec le script suivant :
+### 1. Create the database
+Before running the application, initialize the database with:
 
 ```bash
 python3 init_db.py
 ```
 
-Cela génère un fichier `data.db` contenant la table `agents`.
+This generates a `data.db` file containing the `agents` table.
 
-### 2. Lancer le serveur
-Démarre le serveur local avec :
+### 2. Start the server
+Launch the local server with:
 
 ```bash
 python3 server.py
 ```
 
-Une fois lancé, ouvre ton navigateur à l'adresse :
+Once running, open your browser at:  
 
 👉 [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📁 Arborescence du projet
+## 📁 Project Structure
 
 ```
 .
@@ -56,36 +57,36 @@ Une fois lancé, ouvre ton navigateur à l'adresse :
 
 ---
 
-## ⚙️ Fonctionnalités
+## ⚙️ Features
 
-- 🔐 **Authentification avec rôles**
-  - **Admin** : peut ajouter, modifier ou supprimer un agent (édition des fiches).  
-  - **Utilisateur simple** : peut uniquement consulter les informations des agents.
-- 🔍 Recherche d’agents par nom ou prénom  
-- 🗂️ Filtrage par service  
-- ➕ Ajout d’un agent avec formulaire dynamique  
-- ✏️ Modification des informations d’un agent (admin uniquement)  
-- 🗑️ Suppression d’un agent par email (via modale)  
-- 💡 Affichage responsive avec mise en page simple et lisible  
-
----
-
-## ✅ Dépendances
-
-Aucune installation n’est requise. Le projet utilise uniquement :
-
-- **Python 3** (bibliothèques standard : `http.server`, `sqlite3`, `json`)  
-- **Un navigateur web récent**
+- 🔐 **Role-based authentication**
+  - **Admin**: can add, edit, or delete staff members.  
+  - **User**: can only view staff information.
+- 🔍 Search staff by first or last name  
+- 🗂️ Filter by department/service  
+- ➕ Add staff members via dynamic form  
+- ✏️ Edit staff details (admin only)  
+- 🗑️ Delete staff member by email (via modal)  
+- 💡 Responsive layout with clean and simple design  
 
 ---
 
-## 🛠️ À personnaliser
+## ✅ Dependencies
 
-- `images/logo.png` → remplace ce fichier par le logo de la mairie  
-- `style.css` → modifie les couleurs, polices ou mise en page selon vos besoins  
+No installation required. The project only uses:
+
+- **Python 3** (standard libraries: `http.server`, `sqlite3`, `json`)  
+- **A modern web browser**
+
+---
+
+## 🛠️ Customization
+
+- `images/logo.png` → replace this file with the city hall logo  
+- `style.css` → update colors, fonts, or layout as needed  
 
 ---
 
 ## 📬 Contact
 
-Pour toute question, veuillez contacter le **service informatique de la mairie de Saint-André**.
+For any questions, please contact the **IT Department of the City of Saint-André**.
