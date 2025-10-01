@@ -40,19 +40,25 @@ export async function loadAgents() {
 export function filterAgents() {
   const searchTerm = document.querySelector('.search-bar')?.value.trim().toLowerCase() || '';
   const selectedServiceId = document.querySelector('#service')?.value || 'all';
+  const queryNormalized = searchTerm.replace(/\s+/g, '');
 
   const filtered = agents.filter(agent => {
     const fullName = `${agent.prenom} ${agent.nom}`.toLowerCase();
-    const matchesSearch = fullName.includes(searchTerm);
+
+    // Vérifier tous les numéros
+    const phoneFields = [agent.portable, agent.fixe, agent.numeroPoste];
+    const matchesPhone = phoneFields.some(p => p && p.replace(/\s+/g, '').includes(queryNormalized));
+
+    const matchesName = fullName.includes(searchTerm);
 
     const matchesService = 
       selectedServiceId === 'all' || 
       (agent.service_id && agent.service_id.toString() === selectedServiceId);
 
-    return matchesSearch && matchesService;
+    return (matchesName || matchesPhone) && matchesService;
   });
 
-  renderAgents(filtered, searchTerm, services);
+  renderAgents(filtered, searchTerm, services); // on passe searchTerm pour ouvrir les cartes
 }
 
 // Fonction pour peupler un select avec les services enfants d'un parent donné

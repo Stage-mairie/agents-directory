@@ -154,3 +154,43 @@
     opacity: 0;
   }
 }
+
+.copy-btn {
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  margin-left: 4px;
+  padding: 0;
+  opacity: 0.4;        
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.copy-btn::before,
+.copy-btn::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid #555;
+  border-radius: 2px;
+}
+
+.copy-btn::before {
+  top: 4px;
+  left: 4px;
+  background: #fff;
+}
+
+.copy-btn::after {
+  top: 2px;
+  left: 2px;
+  background: #fff;
+}
+
+.copy-btn:hover {
+  opacity: 1;  
+}
+
