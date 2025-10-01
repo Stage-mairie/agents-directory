@@ -62,12 +62,14 @@ Once running, open your browser at:
 - 🔐 **Role-based authentication**
   - **Admin**: can add, edit, or delete staff members.  
   - **User**: can only view staff information.
-- 🔍 Search staff by first or last name  
+- 🔍 Search staff by first or last name 
+- 📞 Search staff by phone number (mobile, landline, or internal extension) 
 - 🗂️ Filter by department/service  
 - ➕ Add staff members via dynamic form  
 - ✏️ Edit staff details (admin only)  
 - 🗑️ Delete staff member by email (via modal)  
 - 💡 Responsive layout with clean and simple design  
+- 📋 Easily copy information with small square buttons  
 
 ---
 
