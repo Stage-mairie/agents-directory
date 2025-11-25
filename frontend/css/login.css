@@ -1,43 +1,94 @@
-#login-section {
-  min-height: calc(100vh - 170px);
+.header-right {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end; /* décale les boutons à droite */
   align-items: center;
-  padding: 40px 20px;
-  background-color: #f5f5f5;
+  gap: 10px;
+  padding: 10px;
 }
 
 #login-form {
-  background-color: #ffffff;
-  padding: 30px 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #444;
+}
+
+.close-btn:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* bouton Admin stylé */
+#admin-btn {
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background-color: #217b7b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* overlay du formulaire */
+#login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 350px;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  inset: 0;
+}
+
+/* formulaire centré et plus aéré */
+#login-form {
+  background-color: #fff;
+  padding: 40px 35px; /* padding plus grand pour respirer */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* un peu plus de profondeur */
+  width: 100%;
+  max-width: 400px; /* un peu plus large */
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px; /* espace plus large entre les éléments */
 }
 
 #login-form h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.8rem;
+  color: #217b7b;
+  margin: 0 0 10px 0; /* espace sous le titre */
   text-align: center;
-  color: #2d9595;
 }
 
 #login-form input {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 14px;
+  border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  margin-bottom: 10px; /* un petit espace supplémentaire entre les inputs */
 }
 
 #login-form button[type="submit"] {
   background-color: #2d9595;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 14px;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -50,4 +101,5 @@
   text-align: center;
   color: red;
   font-size: 0.9rem;
+  margin-top: -1px; /* juste un petit ajustement visuel */
 }

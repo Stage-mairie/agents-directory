@@ -1,16 +1,23 @@
-import sqlite3
+# backend/db.py
+import mysql.connector
 import threading
 
-DB_FILE = 'data.db'
-db_lock = threading.Lock()  # verrou global pour protéger les écritures
+DB_CONFIG = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'root',
+    'database': 'annuaire_agents',
+    'autocommit': False
+}
+
+db_lock = threading.Lock()
 
 def with_db(write=False):
     class DBContext:
         def __enter__(self):
             if write:
                 db_lock.acquire()
-            self.conn = sqlite3.connect(DB_FILE, timeout=10)
-            self.conn.execute("PRAGMA journal_mode=WAL;")
+            self.conn = mysql.connector.connect(**DB_CONFIG)
             return self.conn
 
         def __exit__(self, exc_type, exc_val, exc_tb):
@@ -21,5 +28,4 @@ def with_db(write=False):
             if write:
                 db_lock.release()
             return False
-
     return DBContext()

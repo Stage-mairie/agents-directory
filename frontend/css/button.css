@@ -3,7 +3,7 @@
 /* ------------------ */
 
 #logout-btn {
-  background-color: #2d9595;
+  background-color: #217b7b;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -13,11 +13,6 @@
   display: none;
   transition: background-color 0.3s ease;
 }
-
-#logout-btn:hover {
-  background-color: #217b7b;
-}
-
 
 /* ------------------ */
 /* BOUTON tri*/

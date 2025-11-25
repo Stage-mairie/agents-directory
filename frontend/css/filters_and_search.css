@@ -8,11 +8,14 @@
 .search-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 900px; /* ← plus large pour les longs services */
   background-color: #f1f1f1;
   border-radius: 50px;
-  padding: 10px 15px;
+  padding: 10px 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .search-icon {
@@ -35,20 +38,6 @@
   outline: none;
 }
 
-.filters-container {
-  background-color: #ffffff;
-  margin: 20px auto 40px auto;
-  width: 80%;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
 .filters-container label {
   font-weight: bold;
 }
@@ -58,4 +47,115 @@ mark {
   font-weight: bold;
   padding: 0 2px;
   border-radius: 3px;
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background-color: #fff;         /* fond blanc */
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 0 auto 30px auto;       /* ← espace ajouté sous le rectangle blanc */
+}
+
+/* ----- Menu déroulant custom pour les services ----- */
+.dropdown {
+  position: absolute;
+  top: 100%;               /* juste sous l’input */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;           /* largeur maximale souhaitée */
+  max-width: 90vw;         /* jamais dépasser 90% de la largeur de la fenêtre */
+  max-height: 300px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.dropdown div {
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;         /* pas de retour à la ligne */
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.dropdown div:hover {
+  background-color: #f0f0f0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* pour bien positionner la liste sous l'input */
+.service-filter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 900px;
+}
+
+.service-filter label {
+  flex-shrink: 0;
+}
+
+#service-search {
+  width: 800px;                   /* ← élargi pour afficher les services longs */
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow-x: auto;
+  text-overflow: ellipsis;
+}
+
+
+#clear-service-filter {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+}
+
+#clear-service-filter:hover {
+  color: #000;
+}
+
+/* --- Ligne 2 : tri + boutons --- */
+.actions-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.actions-line button {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.actions-line button:hover {
+  background-color: #e0e0e0;
+}
+
+#sort-alpha-btn {
+  min-width: 140px;
 }

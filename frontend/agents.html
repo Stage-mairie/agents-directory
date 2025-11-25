@@ -5,16 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Annuaire des Agents</title>
   <link rel="stylesheet" href="css/style.css" />
+
 </head>
 <body>
   <div class="page-container">
     <header>
-      <div class="header-container">
+      <div class="header-container" style="display: flex; align-items: center;">
         <div class="header-left">
           <img src="images/logo.png" alt="Logo de la mairie" class="logo" />
         </div>
         <div class="header-center">
           <h1 class="header-title">Annuaire des Agents de la Mairie de Saint-André</h1>
+        </div>
+        <div class="header-right">
+          <button id="admin-btn" type="button">Admin ?</button>
+          <button id="logout-btn" type="button" style="display:none;">Déconnexion</button>
+        </div>
+
+        <!-- Overlay pour login -->
+        <div id="login-overlay">
+          <form id="login-form">
+            <button type="button" id="login-close-btn" class="close-btn">✖</button>
+            <h2>Connexion</h2>
+
+            <input type="text" id="login-username" placeholder="Nom d’utilisateur" required />
+            <input type="password" id="login-password" placeholder="Mot de passe" required />
+            <button type="submit">Se connecter</button>
+            <div id="login-error" class="error-message"></div>
+          </form>
         </div>
       </div>
     </header>
@@ -31,54 +49,35 @@
       </div>
 
       <div class="filters-container">
-        <button id="sort-alpha-btn">Trier A-Z</button>
         <div class="service-filter">
-          <label for="service">Trier par service :</label>
-          <select id="service">
-            <option value="all">Tous les services</option>
-            <option value="administration">Administration</option>
-            <option value="informatique">Informatique</option>
-            <option value="technique">Technique</option>
-            <option value="education">Éducation</option>
-          </select>
+          <label for="service-search">Filtrer par service :</label>
+          <input type="text" id="service-search" placeholder="Tapez un service..." list="services-list" />
+          <div id="custom-service-list" class="dropdown hidden"></div>
+          <button id="clear-service-filter" type="button">✖</button>
         </div>
-        <button id="add-agent-btn" type="button">Ajouter un agent</button>
-        <button id="logout-btn">Déconnexion</button>
+
+        <div class="actions-line">
+          <button id="sort-alpha-btn">Trier A-Z</button>
+          <button id="add-agent-btn" type="button">Ajouter un agent</button>
+        </div>
       </div>
 
+      <!-- Formulaire d'ajout -->
       <form id="add-agent-form" class="simple-form" style="display: none;">
-        <label>Nom
-          <input name="nom" placeholder="Ex: DUPONT" required />
-        </label>
-
-        <label>Prénom(s)
-          <input name="prenom" placeholder="Ex: Alice" required />
-        </label>
-
-        <label>Portable
-          <input name="portable" placeholder="Ex: 0601020304" pattern="\d{10}" maxlength="10" />
-        </label>
-
-        <label>Fixe
-          <input name="fixe" placeholder="Ex: 0140203040" pattern="\d{10}" maxlength="10" />
-        </label>
-
-        <label>Numéro de Poste
-          <input name="numeroPoste" placeholder="Ex: 1234" pattern="\d{4}" maxlength="4" />
-        </label>
-
-        <label>Poste
-          <input name="poste" placeholder="Ex: Chargé de mission" />
-        </label>
-
-        <label>Email
-          <input name="email" type="email" placeholder="Ex: alice.dupont@mairie.fr" required />
-        </label>
-
+        <label>Nom <input name="nom" placeholder="Ex: DUPONT" required /></label>
+        <label>Prénom(s) <input name="prenom" placeholder="Ex: Alice" required /></label>
+        <label>Portable <input name="portable" placeholder="Ex: 0601020304" pattern="\d{10}" maxlength="10" /></label>
+        <label>Fixe <input name="fixe" placeholder="Ex: 0140203040" pattern="\d{10}" maxlength="10" /></label>
+        <label>Numéro de Poste <input name="numeroPoste" placeholder="Ex: 1234" pattern="\d{4}" maxlength="4" /></label>
+        <label>Email <input name="email" type="email" placeholder="Ex: alice.dupont@mairie.fr" required /></label>
+        <label>Photo <input type="file" id="photo" name="photo" /></label>
         <label>Service</label>
-        <select id="service-level-1" required></select>
-        <select id="service-level-2"></select>
-        <select id="service-level-3"></select>
+        <label>Service niveau 1 <select name="service-level-1"></select></label>
+        <label>Service niveau 2 <select name="service-level-2"></select></label>
+        <label>Service niveau 3 <select name="service-level-3"></select></label>
+        <label>Service niveau 4 <select name="service-level-4"></select></label>
+        <label>Service niveau 5 <select name="service-level-5"></select></label>
+        <label>Service niveau 6 <select name="service-level-6"></select></label>
 
         <div class="button-row">
           <button type="submit" id="save-agent-btn">Enregistrer</button>
@@ -86,12 +85,33 @@
         </div>
       </form>
 
-      <section class="agent-list"></section>
+      <!-- Formulaire d'édition -->
+      <form id="edit-agent-form" class="simple-form" style="display:none;">
+        <input type="hidden" name="edit-email-original" />
+        <label>Nom <input name="edit-nom" required /></label>
+        <label>Prénom <input name="edit-prenom" required /></label>
+        <label>Portable <input name="edit-portable" /></label>
+        <label>Fixe <input name="edit-fixe" /></label>
+        <label>Numéro de Poste <input name="edit-numeroPoste" /></label>
+        <label>Email <input name="edit-email" type="email" required /></label>
+        <label>Service</label>
+        <select id="edit-service-level-1" required></select>
+        <select id="edit-service-level-2"></select>
+        <select id="edit-service-level-3"></select>
+        <div class="button-row">
+          <button type="submit">Enregistrer</button>
+          <button type="button" class="cancel-btn" onclick="this.closest('form').style.display='none'">Annuler</button>
+        </div>
+      </form>
+
+      <!-- Container des agents -->
+      <section id="agents-container" class="agent-list"></section>
     </div>
   </div>
 
+  <script type="module" src="js/login.js"></script>
   <script type="module" src="js/main.js"></script>
-  <script type="module" src="js/editForm.js"></script>
+
 </body>
 <footer>
   <p>&copy; 2025 Mairie de Saint-André. Tous droits réservés.</p>

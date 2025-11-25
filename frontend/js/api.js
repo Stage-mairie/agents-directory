@@ -1,99 +1,116 @@
+// api.js
+import { updateAgentInDOM } from './render.js';
+import { getFlatServices } from './services.js';
+
 export async function fetchAgents() {
-  const res = await fetch('/api/agents.json', { credentials: 'include' });
-
-  if (res.status === 401) {
-    window.location.href = 'login.html';
-    throw new Error('Non authentifié');
-  }
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Erreur lors du chargement des agents : ${err}`);
-  }
-
-  return res.json();
-}
-
-export async function deleteAgent(email) {
-  const res = await fetch('/api/delete', {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    body: JSON.stringify({ email })
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Erreur lors de la suppression : ${err}`);
-  }
-
-  return res.json();
-}
-
-export async function addAgent(agent) {
-  const res = await fetch('/api/add', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    body: JSON.stringify(agent)
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Erreur lors de l'ajout : ${err}`);
-  }
-}
-
-export async function editAgent(agent) {
-  const res = await fetch('/api/edit', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(agent),
-  });
-
-  if (!res.ok) {
-    alert('Erreur lors de la modification');
+  try {
+    const res = await fetch('/api/agents.json', { credentials: 'include' });
+    if (!res.ok) throw new Error('Non authentifié ou erreur serveur');
+    return await res.json();
+  } catch (err) {
+    console.error('Erreur fetchAgents:', err);
+    return [];
   }
 }
 
 export async function getUserInfo() {
-  const res = await fetch('/api/userinfo', { credentials: 'include' });
-
-  if (!res.ok) {
-    throw new Error('Utilisateur non connecté');
+  try {
+    const res = await fetch('/api/userinfo', { credentials: 'include' });
+    if (!res.ok) return {};
+    return await res.json();
+  } catch (err) {
+    console.error('Erreur getUserInfo:', err);
+    return {};
   }
-
-  return res.json();
 }
 
-export async function logout() {
-  const res = await fetch('/api/logout', {
-    method: 'POST',
-    credentials: 'include'
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Erreur lors de la déconnexion : ${err}`);
-  }
-
-  window.location.href = 'login.html';
-}
-
-export function refreshAgentList(renderAgentsCallback) {
-  fetch('/api/agents')
-    .then(res => {
-      if (!res.ok) throw new Error('Erreur lors du chargement des agents');
-      return res.json();
-    })
-    .then(data => {
-      if (typeof renderAgentsCallback === 'function') {
-        renderAgentsCallback(data);
-      } else {
-        console.warn('renderAgentsCallback non fourni ou invalide.');
-      }
-    })
-    .catch(err => {
-      console.error('Échec de la mise à jour de la liste des agents:', err);
+export async function handleLogin({ username, password }) {
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ username, password })
     });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || 'Erreur login');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Erreur handleLogin:', err);
+    throw err;
+  }
+}
+
+export async function handleLogout() {
+  try {
+    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+    window.isAdmin = false;
+    window.isLoggedIn = false;
+    window.location.reload();
+  } catch (err) {
+    console.error('Erreur handleLogout:', err);
+  }
+}
+
+export async function addAgent(agent) {
+  try {
+    const res = await fetch('/api/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(agent)
+    });
+    if (!res.ok) throw new Error('Erreur ajout agent');
+    return await res.json();
+  } catch (err) {
+    console.error('Erreur addAgent:', err);
+    throw err;
+  }
+}
+
+export async function deleteAgent(email) {
+  try {
+    const res = await fetch('/api/delete', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email })
+    });
+    if (!res.ok) throw new Error('Erreur suppression agent');
+    return await res.json();
+  } catch (err) {
+    console.error('Erreur deleteAgent:', err);
+    throw err;
+  }
+}
+
+export async function editAgent(agent, updatedData) {
+  try {
+    const body = { originalEmail: agent.email, ...updatedData };
+
+    const res = await fetch('/api/edit', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(body)
+    });
+
+    if (!res.ok) throw new Error('Erreur modification');
+
+    const updatedAgent = await res.json();
+
+    // Trouver le nom du service
+    const flat = getFlatServices();
+    const serv = flat.find(s => s.id === updatedAgent.service_id);
+    updatedAgent.service_nom = serv ? serv.nom : '';
+
+    updateAgentInDOM(updatedAgent);
+
+    return updatedAgent;
+  } catch (err) {
+    console.error('Impossible de modifier l’agent:', err);
+    throw err;
+  }
 }
